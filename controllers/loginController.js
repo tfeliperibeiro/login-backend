@@ -16,6 +16,7 @@ const registerUserController = async (req, res, next) => {
   return res.status(StatusCodes.CREATED).json({
     message: "Usuário cadastrado com sucesso!",
     id: resultRegisterUser.insertedId,
+    status: "success",
   });
 };
 
