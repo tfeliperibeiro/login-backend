@@ -19,7 +19,7 @@ app.use((_req, res, next) => {
 
 app.use(
   cors({
-    origin: "*",
+    origin: "https://teste-login-front.herokuapp.com/",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
