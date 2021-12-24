@@ -29,9 +29,10 @@ const loginUserController = async (req, res, next) => {
     return next(resultLoginUser);
   }
 
-  return res
-    .status(StatusCodes.OK)
-    .json({ message: "Login feito com sucesso!", redirect: true });
+  return res.status(StatusCodes.OK).json({
+    message: "Login feito com sucesso! Você será redirecionado.",
+    redirect: true,
+  });
 };
 
 module.exports = {
