@@ -3,6 +3,8 @@ const {
   loginUserService,
 } = require("../services/loginService");
 
+const { StatusCodes } = require("http-status-codes");
+
 const registerUserController = async (req, res, next) => {
   const { name, email, password } = req.body;
   const resultRegisterUser = await registerUserService(name, email, password);
@@ -11,7 +13,7 @@ const registerUserController = async (req, res, next) => {
     return next(resultRegisterUser);
   }
 
-  return res.status(201).json({
+  return res.status(StatusCodes.CREATED).json({
     message: "Usuário cadastrado com sucesso!",
     id: resultRegisterUser.insertedId,
   });
@@ -28,7 +30,7 @@ const loginUserController = async (req, res, next) => {
   }
 
   return res
-    .status(200)
+    .status(StatusCodes.OK)
     .json({ message: "Login feito com sucesso!", redirect: true });
 };
 

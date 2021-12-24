@@ -1,3 +1,6 @@
+const crypto = require("crypto-js");
+require("dotenv").config();
+
 const {
   getLoginUserModelByEmail,
   registerNewUserModel,
@@ -17,25 +20,25 @@ const registerUserService = async (name, email, password) => {
     return userAlreadyExists("Usuario já cadastrado!");
   }
 
-  if (resultUser === null) {
-    return internalError(
-      "Erro ao cadastrar usuário! Tente novamente mais tarde."
-    );
-  }
+  const passwordEncrypt = crypto.AES.encrypt(
+    password,
+    process.env.SECRET
+  ).toString();
 
-  return await registerNewUserModel(name, email, password);
+  return await registerNewUserModel(name, email, passwordEncrypt);
 };
 
 const loginUserService = async (id, email, password) => {
   const resultUser = await getLoginUserModelById(id);
 
   if (resultUser === null) {
-    return internalError(
-      "Erro ao fazer login! Tente novamente mais tarde ou cadastre um novo usuário!"
-    );
+    return internalError("Erro ao fazer login, tente novamente mais tarde.");
   }
 
-  if (resultUser.email !== email || resultUser.password !== password) {
+  const byte = crypto.AES.decrypt(resultUser.password, process.env.SECRET);
+  const passwordDecrypt = byte.toString(crypto.enc.Utf8);
+
+  if (resultUser.email !== email || passwordDecrypt !== password) {
     return emailAndPasswordInvalid("Email ou senha inválidos!");
   }
 
