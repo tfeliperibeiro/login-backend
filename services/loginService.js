@@ -32,7 +32,7 @@ const loginUserService = async (email, password) => {
   const resultUser = await getLoginUserModelByEmail(email);
 
   if (resultUser === null) {
-    return internalError("Erro ao fazer login, tente novamente mais tarde.");
+    return emailAndPasswordInvalid("Email ou senha inválidos!");
   }
 
   const byte = crypto.AES.decrypt(resultUser.password, process.env.SECRET);

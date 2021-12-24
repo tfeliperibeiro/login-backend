@@ -10,10 +10,12 @@ const validateLogin = (req, res, next) => {
       .messages({
         "any.required": "O campo email é obrigatório!",
         "string.pattern.base": "Digite um email válido!",
+        "string.empty": "O campo email não pode estar vazio!",
       }),
     password: Joi.string().min(6).not().empty().required().messages({
       "any.required": "O campo senha é obrigatório!",
       "string.min": "A senha deve ter no mínimo de 6 caracteres!",
+      "string.empty": "O campo senha não pode estar vazio!",
     }),
   }).validate(req.body);
 
