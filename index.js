@@ -11,6 +11,7 @@ app.use(errorLogin);
 app.use(
   cors({
     origin: "*",
+    methods: ["GET", "POST"],
   })
 );
 
