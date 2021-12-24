@@ -10,7 +10,7 @@ app.use(Routes);
 app.use(errorLogin);
 app.use(
   cors({
-    origin: "*",
+    origin: "http://localhost:3000/",
   })
 );
 
