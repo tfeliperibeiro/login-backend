@@ -28,8 +28,8 @@ const registerUserService = async (name, email, password) => {
   return await registerNewUserModel(name, email, passwordEncrypt);
 };
 
-const loginUserService = async (id, email, password) => {
-  const resultUser = await getLoginUserModelById(id);
+const loginUserService = async (email, password) => {
+  const resultUser = await getLoginUserModelByEmail(email);
 
   if (resultUser === null) {
     return internalError("Erro ao fazer login, tente novamente mais tarde.");

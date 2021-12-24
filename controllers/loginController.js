@@ -21,10 +21,9 @@ const registerUserController = async (req, res, next) => {
 };
 
 const loginUserController = async (req, res, next) => {
-  const { id } = req.headers;
   const { email, password } = req.body;
 
-  const resultLoginUser = await loginUserService(id, email, password);
+  const resultLoginUser = await loginUserService(email, password);
 
   if (resultLoginUser.isError) {
     return next(resultLoginUser);
