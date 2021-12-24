@@ -8,7 +8,11 @@ const errorLogin = require("./middlewares/error");
 app.use(express.json());
 app.use(Routes);
 app.use(errorLogin);
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 app.listen(process.env.PORT, () =>
   console.log(`Server running on port ${process.env.PORT}`)
