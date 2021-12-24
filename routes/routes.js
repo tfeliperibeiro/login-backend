@@ -1,9 +1,10 @@
 const express = require("express");
+const { registerController } = require("../controllers/loginController");
 
 const Routes = express.Router();
+const { validateRegister } = require("../middlewares/validateRegister");
 
-Routes.get("/login", (_req, res) => {
-  res.status(200).json({ message: "Page Login" });
-});
+Routes.post("/register", validateRegister, registerController);
+Routes.post("/login");
 
 module.exports = Routes;
