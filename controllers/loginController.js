@@ -7,6 +7,7 @@ const { StatusCodes } = require("http-status-codes");
 
 const registerUserController = async (req, res, next) => {
   const { name, email, password } = req.body;
+  console.log(name);
   const resultRegisterUser = await registerUserService(name, email, password);
 
   if (resultRegisterUser.isError) {
