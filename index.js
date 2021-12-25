@@ -7,9 +7,6 @@ require("dotenv").config();
 const errorLogin = require("./middlewares/error");
 
 app.use(express.json());
-app.use(Routes);
-app.use(errorLogin);
-app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use((_req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -24,6 +21,10 @@ app.use(
     credentials: true,
   })
 );
+
+app.use(Routes);
+app.use(errorLogin);
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.listen(process.env.PORT, () =>
   console.log(`Server running on port ${process.env.PORT}`)
